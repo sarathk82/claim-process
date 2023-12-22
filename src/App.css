@@ -2,6 +2,66 @@
   text-align: center;
 }
 
+/* App.css */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9; /* Light gray background color */
+}
+
+.centered-form {
+  width: 320px; /* Increased width */
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners */
+  background-color: #ffffff; /* Background color complementing the page's gray background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+  text-align: center; /* Center-align content */
+}
+
+.centered-form h2 {
+  margin-bottom: 20px; /* Spacing below 'Login' heading */
+  font-size: 24px; /* Bigger font size */
+  color: #333333; /* Text color */
+  text-align: center; /* Center-align 'Login' heading */
+}
+
+.centered-form label {
+  display: block;
+  margin-bottom: 8px; /* Spacing between labels and inputs */
+  font-size: 14px; /* Font size for labels */
+  text-align: left; /* Center-align labels */
+  color: #555555; /* Label text color */
+}
+
+.centered-form input[type="email"],
+.centered-form input[type="password"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 16px; /* Bigger font size for inputs */
+}
+
+.centered-form button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff; /* Vibrant blue button */
+  color: #ffffff; /* Text color */
+  font-size: 16px; /* Bigger font size for button */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.centered-form button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

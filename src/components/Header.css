@@ -1,0 +1,86 @@
+/* Header.css */
+
+/* Header container */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+/* Menu icon */
+.menu-icon {
+  position: relative;
+}
+
+.menu-icon i {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Profile dropdown */
+.profile-icon {
+  position: relative;
+  font-size: 24px;
+}
+
+.profile-icon .profile-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background-color: #007bff;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  display: none;
+  z-index: 1;
+  color: #ffffff;
+}
+
+.profile-icon:hover .profile-dropdown {
+  display: block;
+}
+
+/* Adjust styles for links inside the dropdown as needed */
+.profile-icon .profile-dropdown a {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 5px 0;
+}
+
+.profile-icon .profile-dropdown a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+/* Menu dropdown */
+.menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background-color: #007bff;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  display: none;
+  z-index: 1;
+}
+
+.menu-icon i.active + .menu {
+  display: block;
+}
+
+.menu a {
+  display: block;
+  padding: 5px 0;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
