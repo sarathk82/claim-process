@@ -5,26 +5,20 @@ import { Link } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './Header.css';
 
-const Header = () => {
-    const [showSidebar, setShowSidebar] = useState(false);
+const Header = ({ isNavBarExpanded, toggleNavBar }) => {
     const [showProfile, setShowProfile] = useState(false);
-
-
-    const toggleSidebar = () => {
-        setShowSidebar(!showSidebar);
-    };
 
     const toggleProfile = () => {
         setShowProfile(!showProfile);
     };
 
     return (
-        <div className="header-wrapper">
+        <div className={`header-wrapper ${isNavBarExpanded ? 'sidebar-open' : ''}`}>
             <header>
-                <div className={`hamburger-menu ${showSidebar ? 'active' : ''}`} onClick={toggleSidebar}>
-                    <i className={`fas ${showSidebar ? 'fa-times' : 'fa-bars'}`} />
+                <div className={`hamburger-menu ${isNavBarExpanded ? 'active' : ''}`} onClick={toggleNavBar}>
+                    <i className={`fas ${isNavBarExpanded ? 'fa-times' : 'fa-bars'}`} />
                 </div>
-                <div> Claims Processing</div>
+                <div>Claims Processing</div>
                 <div className="profile-icon" onClick={toggleProfile}>
                     <i className={`fas fa-user-circle ${showProfile ? 'active' : ''}`} />
                     {showProfile && (
@@ -34,25 +28,18 @@ const Header = () => {
                         </div>
                     )}
                 </div>
-
             </header>
-            <div className={`content ${showSidebar ? 'sidebar-open' : ''}`}>
-                <h1>Welcome to Home Page</h1>
-                <p>This is the home page content.</p>
-            </div>
-
-
-            <div className={`sidebar ${showSidebar ? 'open' : ''}`}>
+            <div className={`sidebar ${isNavBarExpanded ? 'open' : ''}`}>
                 <nav>
                     <div className="menu-item">
-                        <Link to="#">Projects</Link>
+                        <Link to="/projects">Projects</Link>
                         <div className="submenu">
                             <Link to="/create-project">Create</Link>
                             <Link to="/view-projects">View</Link>
                         </div>
                     </div>
                     <div className="menu-item">
-                        <Link to="#">Teams</Link>
+                        <Link to="/teams">Teams</Link>
                         <div className="submenu">
                             <Link to="/create-team">Create</Link>
                             <Link to="/view-teams">View</Link>
@@ -61,7 +48,6 @@ const Header = () => {
                 </nav>
             </div>
         </div>
-
     );
 };
 
