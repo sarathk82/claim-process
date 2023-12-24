@@ -1,4 +1,18 @@
+/* Home.css */
+
+/* Content container */
+.content {
+  padding-left: 60px; /* Initial padding when sidebar is collapsed */
+  transition: padding-left 0.3s ease; /* Apply transition effect */
+}
+
+/* Expanded content when sidebar is open */
+.sidebar-open .content {
+  padding-left: 250px; /* Adjust padding when sidebar is expanded */
+}
+
+/* Home page content */
 .home-content {
-  text-align: center; /* Center-align content horizontally */
-  margin-top: 50px; /* Example margin for top spacing */
+  padding: 20px;
+  text-align: center; /* Center align content */
 }

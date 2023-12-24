@@ -6,124 +6,125 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #007bff;
-  color: #ffffff;
+  background-color: #333; /* Header background color */
+  color: #ffffff; /* Header text color */
+  margin: 0;
 }
 
-/* Menu icon */
-.menu-icon {
+/* Hamburger menu */
+.hamburger-menu {
+  cursor: pointer;
+  font-size: 24px;
+  margin-left: 10px;
+  color: #ffffff; /* Hamburger menu color */
+  transition: transform 0.3s ease; /* Add transition for smooth animation */
+}
+
+.hamburger-menu.active {
+  transform: rotate(90deg); /* Rotate into X symbol */
+}
+
+/* Sidebar navigation */
+.sidebar {
+  position: fixed;
+  top: 45px; /* Adjust to leave space for header */
+  left: -250px; /* Initially hide sidebar off-screen */
+  width: 250px;
+  height: calc(100% - 50px); /* Adjust height according to your layout */
+  background-color: #333;
+  transition: left 0.5s ease; /* Animate sidebar movement */
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.menu-item {
+  padding: 15px 20px;
+  border-bottom: 1px solid #555;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.menu-item a:hover {
+  color: #007bff;
+}
+
+.submenu {
+  display: none;
+  padding-left: 20px;
+}
+
+.menu-item:hover .submenu {
+  display: block;
+}
+
+.submenu a {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.submenu a:hover {
+  color: #007bff;
+}
+
+.header-wrapper {
   position: relative;
 }
 
-.menu-icon i {
-  font-size: 24px;
+.content {
+  transition: margin-left 0.3s ease; /* Animate content when sidebar opens */
+  margin-left: 0;
+}
+
+.content.sidebar-open {
+  margin-left: 250px; /* Adjust based on sidebar width */
+}
+
+/* Profile icon */
+.profile-icon {
+  position: relative;
   cursor: pointer;
+  font-size: 24px;
 }
 
 /* Profile dropdown */
-.profile-icon {
-  position: relative;
-  font-size: 24px;
-}
-
-.profile-icon .profile-dropdown {
+.profile-dropdown {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 5px);
   right: 0;
-  background-color: #007bff;
+  background-color: #333; /* Change this color as needed */
+  font-size: 15px;
   border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 200px;
   padding: 10px;
-  display: none;
-  z-index: 1;
-  color: #ffffff;
 }
 
+/* Show profile dropdown when .profile-icon is hovered */
 .profile-icon:hover .profile-dropdown {
   display: block;
 }
 
 /* Adjust styles for links inside the dropdown as needed */
-.profile-icon .profile-dropdown a {
+.profile-dropdown a {
   display: block;
   text-decoration: none;
-  color: #ffffff;
+  color: #fff; /* Change text color */
   padding: 5px 0;
 }
 
-.profile-icon .profile-dropdown a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
-
-/* Menu dropdown */
-.menu {
-  position: relative;
-  top: calc(100% + 10px);
-  left: 0;
-  background-color: #007bff;
-  border-radius: 4px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  display: flex;
-  z-index: 1;
-}
-
-.menu-item {
-  position: relative;
-  margin: 0 20px;
-}
-
-.menu-icon i.active + .menu {
-  display: block;
-}
-
-.menu a {
-  display: block;
-  padding: 5px 0;
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.menu a:hover {
-  color: #007bff; /* Text color on hover */
-  background-color: #ffffff; /* Background color on hover */
-}
-
-/* Submenu */
-.submenu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 0;
-  background-color: #007bff;
-  padding: 10px;
-  z-index: 10; /* Increase the z-index to ensure visibility */
-}
-
-/* Show submenu on hover */
-.menu-item:hover .submenu {
-  display: block;
-}
-
-/* Ensure links inside the submenu are visible and clickable */
-.submenu a {
-  display: block;
-  padding: 5px 0;
-  color: #ffffff;
-  text-decoration: none;
-  pointer-events: auto;
-}
-
-.submenu a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  /* Add any other hover effects as needed */
-}
-
-/* Menu item text */
-.menu-item > span {
-  cursor: pointer;
-  color: #ffffff;
-  text-decoration: none;
+.profile-dropdown a:hover {
+  background-color: #007bff; /* Background color on hover */
 }

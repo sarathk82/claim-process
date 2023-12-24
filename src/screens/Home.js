@@ -1,15 +1,27 @@
+// Home.js
 
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header'; // Adjust the path as needed
+import './Home.css'; // Import the CSS file
 
 const Home = () => {
+    const [isNavBarExpanded, setIsNavBarExpanded] = useState(false);
+
+    const toggleNavBar = () => {
+        setIsNavBarExpanded(!isNavBarExpanded);
+    };
+
     return (
-        <div>
-            <Header /> {/* Include the Header component */}
-            <div className="home-content" >
-                {/* Your home page content */}
-                <h1>Welcome to the Home Page</h1>
-                <p>This is the home page content.</p>
+        <div className="home-page">
+            <Header isNavBarExpanded={isNavBarExpanded} toggleNavBar={toggleNavBar} />
+            <div className={`content ${isNavBarExpanded ? 'sidebar-open' : ''}`}>
+                <div className="home-content">
+                    <h1>Welcome to the Home Page</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt in sem sed tempor.
+                        Fusce vel turpis vitae lacus ultrices tempor non in massa.
+                    </p>
+                </div>
             </div>
         </div>
     );
