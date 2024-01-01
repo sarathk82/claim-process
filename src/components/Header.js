@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.css';
 import './Header.css';
 
+
 const Header = ({ isNavBarExpanded, toggleNavBar }) => {
     const [showProfile, setShowProfile] = useState(false);
 

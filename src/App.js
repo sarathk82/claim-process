@@ -4,6 +4,7 @@ import Login from './screens/Login';
 import Home from './screens/Home';
 
 import './App.css';
+import CreateProject from './components/CreateProject';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
 
             <Route exact path='/login' element={<Login />} />
             <Route exact path='/' element={<Home />} />
+            <Route exact path='/create-project' element={<CreateProject />} />
 
           </Routes>
         </BrowserRouter>
