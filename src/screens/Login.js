@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import '../App.css';
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
     // State to handle form fields
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     // Function to handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Perform login logic using email and password
-        // Example: Call an API to authenticate the user
-        console.log('Login with:', email, password);
+
+        navigate('/');
     };
+
 
     return (
         <div className="login-container">
@@ -39,7 +42,7 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <button type="submit">Login</button>
+                    <button type="submit" >Login</button>
                 </form>
                 <div className="forgot-password">
                     <a href="/forgot-password">Forgot password?</a>

@@ -6,8 +6,8 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #333; /* Header background color */
-  color: #ffffff; /* Header text color */
+  background-color: #007bff; /* Header background color */
+  color: white; /* Header text color */
   margin: 0;
 }
 
@@ -16,12 +16,13 @@ header {
   cursor: pointer;
   font-size: 24px;
   margin-left: 10px;
-  color: #ffffff; /* Hamburger menu color */
+  color: white; /* Hamburger menu color */
   transition: transform 0.3s ease; /* Add transition for smooth animation */
 }
 
 .hamburger-menu.active {
   transform: rotate(90deg); /* Rotate into X symbol */
+  color: white;
 }
 
 /* Sidebar navigation */
@@ -31,7 +32,7 @@ header {
   left: -250px; /* Initially hide sidebar off-screen */
   width: 250px;
   height: calc(100% - 50px); /* Adjust height according to your layout */
-  background-color: #333;
+  background-color: #007bff;
   transition: left 0.5s ease; /* Animate sidebar movement */
   z-index: 1000; /* Ensure it appears above other content */
 }
@@ -56,7 +57,7 @@ header {
 }
 
 .menu-item a:hover {
-  color: #007bff;
+  color: black;
 }
 
 .submenu {
@@ -66,18 +67,20 @@ header {
 
 .menu-item:hover .submenu {
   display: block;
+  color: black;
 }
 
 .submenu a {
   display: block;
   text-decoration: none;
-  color: #ffffff;
+  color: black;
   font-size: 14px;
   padding: 10px 0;
 }
 
 .submenu a:hover {
   color: #007bff;
+  background-color: white;
 }
 
 .header-wrapper {

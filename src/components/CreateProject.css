@@ -2,7 +2,7 @@
 
 /* Styling for the wizard form container */
 .wizard-form {
-  max-width: 600px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f5f5f5;
@@ -49,6 +49,19 @@
   height: 40px;
   border-radius: 50%;
   background-color: #28a745;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px; /* Adjust margin as needed */
+}
+
+.not-started .chevron {
+  /* Styles for steps that are not started */
+  width: 40px; /* Adjust width and height for the circular box */
+  height: 40px;
+  border-radius: 50%;
+  background-color: gray;
   color: white;
   display: flex;
   justify-content: center;
@@ -118,4 +131,23 @@ button:hover {
   justify-content: flex-end; /* Align buttons to the right */
   margin-top: 20px;
   gap: 10px; /* Add some space between buttons */
+}
+
+.upload-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Add vertical spacing between upload elements */
+}
+
+.upload-buttons input[type="file"],
+.upload-buttons button {
+  margin-bottom: 10px; /* Add margin below each upload element */
+}
+
+.file-preview img {
+  max-width: 100%; /* Set maximum width for the image */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Ensure it behaves as a block element */
+  margin: 0 auto; /* Center the image */
+  /* Add other styling as needed */
 }

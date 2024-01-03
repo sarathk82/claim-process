@@ -1,9 +1,38 @@
 import React, { useState } from 'react';
 import './CreateProject.css';
 import Header from './Header.js';
+import { useNavigate } from 'react-router-dom';
 
 const CreateProject = () => {
     const [step, setStep] = useState(1);
+    const navigate = useNavigate();
+    const [imageFile, setImageFile] = useState(null);
+    const [templateFile, setTemplateFile] = useState(null);
+
+    const [imageuploadOption, setImageUploadOption] = useState(''); // State to track the selected upload option
+    const [fileuploadOption, setFileUploadOption] = useState(''); // State to track the selected upload option
+
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImageFile(file);
+            setImageUploadOption('image');
+            console.log('Image uploaded:', file.name);
+        }
+    };
+
+    const handleFileUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setTemplateFile(file);
+            setFileUploadOption('file');
+            console.log('File uploaded:', file.name);
+        }
+    };
+
+
+
     const [projectDetails, setProjectDetails] = useState({
         projectName: '',
         projectDescription: '',
@@ -14,7 +43,6 @@ const CreateProject = () => {
     const handleNext = () => {
         setStep(step + 1);
     };
-
     const handlePrev = () => {
         setStep(step - 1);
     };
@@ -28,8 +56,13 @@ const CreateProject = () => {
     };
 
     const handleCancel = () => {
-
+        const shouldCancel = window.confirm('Are you sure you want to cancel?');
+        if (shouldCancel) {
+            navigate('/');
+        }
     };
+
+
 
     return (
         <div><Header />
@@ -37,16 +70,27 @@ const CreateProject = () => {
             <div className="wizard-form">
                 <div className="stepper">
                     {/* Step 1 */}
-                    <div className={`step ${step === 1 ? 'active' : step > 1 ? 'completed' : ''}`}>
+                    <div className={`step ${step === 1 ? 'active' : step > 1 ? 'completed' : 'not-started'}`}>
                         <div className="chevron">1</div>
                         <div>Project Details</div>
                     </div>
 
 
-                    <div className={`step ${step === 2 ? 'active' : step > 1 ? 'completed' : ''}`}>
+                    <div className={`step ${step === 2 ? 'active' : step > 2 ? 'completed' : 'not-started'}`}>
                         <div className="chevron">2</div>
                         <div>Teams</div>
                     </div>
+
+                    <div className={`step ${step === 3 ? 'active' : step > 3 ? 'completed' : 'not-started'}`}>
+                        <div className="chevron">3</div>
+                        <div>Build Claims</div>
+                    </div>
+
+                    <div className={`step ${step === 4 ? 'active' : step > 4 ? 'completed' : 'not-started'}`}>
+                        <div className="chevron">4</div>
+                        <div>Review Claims</div>
+                    </div>
+
                 </div>
 
                 <form>
@@ -149,6 +193,83 @@ const CreateProject = () => {
 
                         </div>
                     )}
+
+                    {/* Step 2 */}
+                    {step === 3 && (
+                        <div className="step">
+                            {/* Step 3 content */}
+                            <h2>Step 3: Upload Image or File</h2>
+                            <div>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="image"
+                                        checked={imageuploadOption === ''}
+                                        onChange={(e) =>
+                                            setImageUploadOption('image')
+
+                                        } disabled
+                                    />
+                                    Upload Image
+                                </label>
+
+                                <input
+                                    type="file"
+                                    id="imageUpload"
+                                    accept="image/*"
+                                    onChange={handleImageUpload}
+                                    required
+
+                                />
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value="file"
+                                        checked={fileuploadOption === ''}
+                                        onChange={(e) =>
+                                            setFileUploadOption('file')
+                                        } disabled
+                                    />
+                                    Upload File
+                                </label>
+                                <input
+                                    type="file"
+                                    id="fileUpload"
+                                    accept=".pdf"
+                                    onChange={handleFileUpload}
+                                    required
+                                />
+                            </div>
+
+                            <div className="file-preview">
+                                {imageFile && (
+                                    <img src={URL.createObjectURL(imageFile)} alt="Uploaded" />
+                                )}
+                                {templateFile && (
+                                    <p>Uploaded file: {templateFile.name}</p>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+
+
+
+
+                    {/* Step 4 */}
+                    {step === 4 && (
+                        <div className="step">
+                            {/* Step 3 content */}
+                            <h2>Step 4: Uploaded Files Preview</h2>
+                            <div className="upload-buttons">
+                                <div className="file-preview">
+                                    {imageFile && <img src={URL.createObjectURL(imageFile)} alt="Uploaded" />}
+                                    {templateFile && <p>Uploaded claims template: {templateFile.name}</p>}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
 
                     {/* Next and Back Buttons */}
                     <div class="button-container">
