@@ -9,15 +9,18 @@ const CreateProject = () => {
     const [imageFile, setImageFile] = useState(null);
     const [templateFile, setTemplateFile] = useState(null);
 
-    const [imageuploadOption, setImageUploadOption] = useState(''); // State to track the selected upload option
-    const [fileuploadOption, setFileUploadOption] = useState(''); // State to track the selected upload option
+    const [uploadOption, setUploadOption] = useState(''); // State to track the selected upload option
 
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0];
         if (file) {
             setImageFile(file);
-            setImageUploadOption('image');
+            if (templateFile) {
+                setUploadOption('imageAndFile'); // Both files are uploaded
+            } else {
+                setUploadOption('image');
+            }
             console.log('Image uploaded:', file.name);
         }
     };
@@ -26,11 +29,14 @@ const CreateProject = () => {
         const file = e.target.files[0];
         if (file) {
             setTemplateFile(file);
-            setFileUploadOption('file');
+            if (imageFile) {
+                setUploadOption('imageAndFile'); // Both files are uploaded
+            } else {
+                setUploadOption('file');
+            }
             console.log('File uploaded:', file.name);
         }
     };
-
 
 
     const [projectDetails, setProjectDetails] = useState({
@@ -204,9 +210,9 @@ const CreateProject = () => {
                                     <input
                                         type="checkbox"
                                         value="image"
-                                        checked={imageuploadOption === ''}
+                                        checked={uploadOption === 'image' || uploadOption === 'imageAndFile'}
                                         onChange={(e) =>
-                                            setImageUploadOption('image')
+                                            setUploadOption(e.target.checked ? 'image' : '')
 
                                         } disabled
                                     />
@@ -225,9 +231,9 @@ const CreateProject = () => {
                                     <input
                                         type="checkbox"
                                         value="file"
-                                        checked={fileuploadOption === ''}
+                                        checked={uploadOption === 'file' || uploadOption === 'imageAndFile'}
                                         onChange={(e) =>
-                                            setFileUploadOption('file')
+                                            setUploadOption(e.target.checked ? 'file' : '')
                                         } disabled
                                     />
                                     Upload File
