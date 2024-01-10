@@ -10,6 +10,13 @@ const CreateProject = () => {
     const [templateFile, setTemplateFile] = useState(null);
 
     const [uploadOption, setUploadOption] = useState(''); // State to track the selected upload option
+    const [isNavBarExpanded, setIsNavBarExpanded] = useState(false);
+
+    const toggleNavBar = () => {
+        setIsNavBarExpanded(!isNavBarExpanded);
+    };
+
+
 
 
     const handleImageUpload = (e) => {
@@ -43,14 +50,31 @@ const CreateProject = () => {
         projectName: '',
         projectDescription: '',
         category: '',
-        geography: ''
+        geography: '',
+        marketing: '',
+        regulatory: '',
+        rnd: '',
+        legal: ''
     });
 
     const handleNext = () => {
-        setStep(step + 1);
+        const form = document.querySelector('form');
+        if (form.checkValidity()) {
+
+            setStep(step + 1); // Proceed to the next step if the form is valid
+        } else {
+            form.reportValidity(); // Display native browser validation messages
+        }
     };
-    const handlePrev = () => {
-        setStep(step - 1);
+
+
+    const handlePrev = (e) => {
+        e.preventDefault(); // Prevent the default form submission behavior
+
+        // Move to the previous step only if the current step is not the first step
+        if (step > 1) {
+            setStep(step - 1);
+        }
     };
 
     const handleInputChange = (event) => {
@@ -64,14 +88,45 @@ const CreateProject = () => {
     const handleCancel = () => {
         const shouldCancel = window.confirm('Are you sure you want to cancel?');
         if (shouldCancel) {
-            navigate('/');
+            navigate(`${process.env.PUBLIC_URL}/`);
+        }
+    };
+
+    // Consolidated data for review
+    const consolidatedData = {
+        projectName: projectDetails.projectName,
+        projectDescription: projectDetails.projectDetails,
+        category: projectDetails.category,
+        geography: projectDetails.geography, // Data from Step 1: Project Details
+        marketing: projectDetails.marketing, // Data from Step 2: Team Details
+        regulatory: projectDetails.regulatory,
+        rnd: projectDetails.rnd,
+        legal: projectDetails.legal,
+        imageFile: imageFile, // Data from Step 3: Upload Image or File
+        templateFile: templateFile
+    };
+
+    const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+
+    const handleCheckboxChange = () => {
+        setIsCheckboxChecked(!isCheckboxChecked);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (isCheckboxChecked) {
+            // Perform submission action (e.g., API call, form submission)
+            // Add your logic here for handling the form submission
+            console.log("Form submitted!");
+        } else {
+            alert('Please check the box to confirm before submitting.');
         }
     };
 
 
 
     return (
-        <div><Header />
+        <div>   <Header isNavBarExpanded={isNavBarExpanded} toggleNavBar={toggleNavBar} />
 
             <div className="wizard-form">
                 <div className="stepper">
@@ -106,7 +161,7 @@ const CreateProject = () => {
                             <h2>Step 1: Project Details</h2>
                             {/* Project Details Form */}
                             <div>
-                                <label htmlFor="projectName">Project Name(Mandatory)</label>
+                                <label htmlFor="projectName">Project Name<span className="mandatory">*</span></label>
                                 <input
                                     type="text"
                                     id="projectName"
@@ -154,7 +209,7 @@ const CreateProject = () => {
                             <h2>Step 2: Team Details</h2>
                             {/* Project Details Form */}
                             <div>
-                                <label htmlFor="marketing">Marketing</label>
+                                <label htmlFor="marketing">Marketing<span className="mandatory">*</span></label>
                                 <input
                                     type="text"
                                     id="marketing"
@@ -217,6 +272,7 @@ const CreateProject = () => {
                                         } disabled
                                     />
                                     Upload Image
+                                    <span className="mandatory">*</span>
                                 </label>
 
                                 <input
@@ -237,6 +293,7 @@ const CreateProject = () => {
                                         } disabled
                                     />
                                     Upload File
+                                    <span className="mandatory">*</span>
                                 </label>
                                 <input
                                     type="file"
@@ -265,12 +322,40 @@ const CreateProject = () => {
                     {/* Step 4 */}
                     {step === 4 && (
                         <div className="step">
-                            {/* Step 3 content */}
-                            <h2>Step 4: Uploaded Files Preview</h2>
-                            <div className="upload-buttons">
+                            <h2>Step 4: Review Claims</h2>
+                            {/* Displaying consolidated data for review */}
+                            <div className="review-section">
+                                <h3>Project Details:</h3>
+                                <p>Project Name: {consolidatedData.projectName}</p>
+                                <p>Project Description: {consolidatedData.projectDescription}</p>
+                                <p>Category: {consolidatedData.category}</p>
+                                <p>Geography: {consolidatedData.geography}</p>
+
+                                <h3>Team Details:</h3>
+                                <p>Marketing: {consolidatedData.marketing}</p>
+                                <p>Regulatory: {consolidatedData.regulatory}</p>
+                                <p>R&D: {consolidatedData.rnd}</p>
+                                <p>Legal: {consolidatedData.legal}</p>
+
+                                <h3>Uploaded Files Preview:</h3>
                                 <div className="file-preview">
-                                    {imageFile && <img src={URL.createObjectURL(imageFile)} alt="Uploaded" />}
-                                    {templateFile && <p>Uploaded claims template: {templateFile.name}</p>}
+                                    {consolidatedData.imageFile && (
+                                        <img src={URL.createObjectURL(consolidatedData.imageFile)} alt="Uploaded" />
+                                    )}
+                                    {consolidatedData.templateFile && (
+                                        <p>Uploaded claims template: {consolidatedData.templateFile.name}</p>
+                                    )}
+                                </div>
+                                <div className="checkbox-container">
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            checked={isCheckboxChecked}
+                                            onChange={handleCheckboxChange}
+                                            required
+                                        />
+                                        I confirm that the information provided is accurate.
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -278,11 +363,11 @@ const CreateProject = () => {
 
 
                     {/* Next and Back Buttons */}
-                    <div class="button-container">
-                        {step > 1 && <button onClick={handlePrev}>Back</button>}
-                        {step < 5 && <button onClick={handleNext}>Next</button>}
-                        <button onClick={handleCancel} >Cancel</button>
-                        {step === 5 && <button type="submit">Submit</button>}
+                    <div className="button-container">
+                        {step > 1 && <button type="button" onClick={handlePrev}>Back</button>}
+                        {step < 5 && <button type="button" onClick={handleNext}>Next</button>}
+                        <button type="button" onClick={handleCancel} >Cancel</button>
+                        {step === 5 && <button type="button" onClick={handleSubmit}>Submit</button>}
                     </div>
                 </form>
             </div>

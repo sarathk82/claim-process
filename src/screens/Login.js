@@ -13,7 +13,7 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        navigate('/');
+        navigate(`${process.env.PUBLIC_URL}/`);
     };
 
 

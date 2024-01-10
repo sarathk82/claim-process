@@ -15,10 +15,9 @@ const App = () => {
 
           <Routes>
 
-            <Route exact path='claim-process/login' element={<Login />} />
-            <Route exact path='/claim-process/' element={<Home />} />
+            <Route path={process.env.PUBLIC_URL + '/login'} element={<Login />} />
+            <Route path={`${process.env.PUBLIC_URL}/`} element={<Home />} />
             <Route exact path='/create-project' element={<CreateProject />} />
-
           </Routes>
         </BrowserRouter>
       </Container>

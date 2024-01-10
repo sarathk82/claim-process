@@ -151,3 +151,8 @@ button:hover {
   margin: 0 auto; /* Center the image */
   /* Add other styling as needed */
 }
+
+.mandatory {
+  color: red; /* Set color to red */
+  margin-left: 3px; /* Add spacing between the text and the star */
+}
